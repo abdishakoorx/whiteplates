@@ -11,7 +11,7 @@ function Headers() {
     return (
         <div className='flex items-center justify-between p-6 mt-2 shadow-sm border-tertiary md:px-20'>
             <div>
-                <Image src='/logo.png' alt='logo' width={200} height={50} />
+                <Link href={'/'}><Image src='/logo.png' alt='logo' width={200} height={50} /></Link>
             </div>
            <div>
                 {isSignedIn ? 

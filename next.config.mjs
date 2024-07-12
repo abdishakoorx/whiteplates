@@ -6,6 +6,12 @@ const nextConfig = {
             hostname:'us-east-1-shared-usea1-02.graphassets.com',
             port:'',
             pathname:'/**'
+        },
+        {
+            protocol:'https',
+            hostname:'images.unsplash.com',
+            port:'',
+            pathname:'/**'
         }]
     }
 };
