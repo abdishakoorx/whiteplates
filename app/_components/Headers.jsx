@@ -2,6 +2,7 @@
 import React from 'react'
 import { SignedIn, SignedOut, UserButton, useUser, isSignedIn } from '@clerk/clerk-react'
 import Image from 'next/image'
+import Link from 'next/link';
 
 
 function Headers() {
@@ -19,8 +20,8 @@ function Headers() {
                 </SignedIn>
                 :
                 <div className='flex gap-6'>
-                <h2 className='p-2 border border-orange-300 rounded-md cursor-pointer hover:bg-primary hover:text-white hover:scale-110'>Register</h2>
-                <h2 className='p-2 border border-orange-300 rounded-md cursor-pointer hover:bg-primary hover:text-white hover:scale-110'>Login</h2>
+                <Link href={'/sign-up'}><h2 className='p-2 border border-orange-300 rounded-md cursor-pointer hover:bg-primary hover:text-white hover:scale-110'>Register</h2></Link>
+                <Link href={'/sign-in'}><h2 className='p-2 border border-orange-300 rounded-md cursor-pointer hover:bg-primary hover:text-white hover:scale-110'>Login</h2></Link>
                 </div>
                 }
            </div>
