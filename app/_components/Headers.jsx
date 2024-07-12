@@ -1,0 +1,32 @@
+"use client"
+import React from 'react'
+import { SignedIn, SignedOut, UserButton, useUser, isSignedIn } from '@clerk/clerk-react'
+import Image from 'next/image'
+
+
+function Headers() {
+    const {user, isSignedIn} = useUser();
+
+    return (
+        <div className='flex items-center justify-between p-6 mt-2 shadow-sm border-tertiary md:px-20'>
+            <div>
+                <Image src='/logo.png' alt='logo' width={200} height={50} />
+            </div>
+           <div>
+                {isSignedIn ? 
+                <SignedIn>
+                     <UserButton />
+                </SignedIn>
+                :
+                <div className='flex gap-6'>
+                <h2 className='p-2 border border-orange-300 rounded-md cursor-pointer hover:bg-primary hover:text-white hover:scale-110'>Register</h2>
+                <h2 className='p-2 border border-orange-300 rounded-md cursor-pointer hover:bg-primary hover:text-white hover:scale-110'>Login</h2>
+                </div>
+                }
+           </div>
+            
+        </div>
+    )
+}
+
+export default Headers;
