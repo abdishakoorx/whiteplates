@@ -16,7 +16,7 @@ const GetCategory = async () => {
     }
   `;
   
-  const result = await request(MASTER_URL!, query);
+  const result = await request(MASTER_URL, query);
   return result;
 };
 
@@ -30,7 +30,7 @@ const GetSizes = async () => {
     }
   `;
   
-  const result = await request(MASTER_URL!, query);
+  const result = await request(MASTER_URL, query);
   return result;
 };
 
@@ -52,7 +52,7 @@ const GetBases = async () => {
     }
   `;
   
-  const result = await request(MASTER_URL!, query);
+  const result = await request(MASTER_URL, query);
   return result;
 };
 
@@ -74,7 +74,7 @@ const GetLayerings = async () => {
     }
   `;
   
-  const result = await request(MASTER_URL!, query);
+  const result = await request(MASTER_URL, query);
   return result;
 };
 
@@ -96,7 +96,7 @@ const GetToppings = async () => {
     }
   `;
   
-  const result = await request(MASTER_URL!, query);
+  const result = await request(MASTER_URL, query);
   return result;
 };
 
@@ -110,7 +110,7 @@ const GetBeverages = async () => {
     }
   `;
   
-  const result = await request(MASTER_URL!, query);
+  const result = await request(MASTER_URL, query);
   return result;
 };
 
