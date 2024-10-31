@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Provider from "./Provider";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import AppSidebar from "./_components/AppSidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,10 +12,25 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-      <html lang='en'>      
-      <body>        
-        <Provider>{children}</Provider>     
-      </body>    
-      </html>
+    <html lang="en">
+      <body className={inter.className}>
+        <SidebarProvider
+          style={{
+            "--sidebar-width": "20rem",
+            "--sidebar-width-mobile": "20rem",
+
+          }}>
+          <div className="flex h-screen">
+            <AppSidebar />
+            <div className="flex-1 overflow-auto">
+              <SidebarTrigger className="block p-4 lg:hidden" />
+              <main className="container p-4 mx-auto">
+                {children}
+              </main>
+            </div>
+          </div>
+        </SidebarProvider>
+      </body>
+    </html>
   );
 }

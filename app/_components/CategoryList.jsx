@@ -2,13 +2,11 @@
 import React, { useEffect, useRef, useState, Suspense } from 'react';
 import GlobalApi from '../_utils/GlobalApi';
 import Image from 'next/image';
-import { ArrowLeftCircle, ArrowRightCircle } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { ChevronRight } from 'lucide-react';
 
-// Separate component for the category list content
 function CategoryListContent() {
-  const listRef = useRef(null);
   const [categoryList, setCategoryList] = useState([]);
   const params = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -27,83 +25,59 @@ function CategoryListContent() {
     });
   };
 
-  const ScrollLeftHandler = () => {
-    if (listRef.current) {
-      listRef.current.scrollBy({
-        left: -200,
-        behavior: 'smooth',
-      });
-    }
-  };
-
-  const ScrollRightHandler = () => {
-    if (listRef.current) {
-      listRef.current.scrollBy({
-        left: 200,
-        behavior: 'smooth',
-      });
-    }
-  };
-
   return (
-    <div className='relative mt-10'>
-      <div className='flex gap-12 overflow-x-auto scrollbar-hide' ref={listRef}>
-        {categoryList &&
-          categoryList.map((category, index) => (
-            <div key={index}>
-              <Link
-                href={'?category=' + category.slug}
-                className={
-                  'flex flex-col items-center gap-2 rounded-xl min-w-[200px] hover:border-primary hover:bg-orange-50 cursor-pointer group ' +
-                  (selectedCategory === category.slug &&
-                    'text-primary border-primary bg-orange-150  rounded-xl mb-3')
-                }
-              >
+    <div className="space-y-2">
+      {categoryList &&
+        categoryList.map((category, index) => (
+          <Link
+            key={index}
+            href={'?category=' + category.slug}
+            className={`
+              flex items-center justify-between p-2 rounded-lg transition-all duration-200 
+              ${selectedCategory === category.slug 
+                ? 'bg-primary/10 text-primary' 
+                : 'hover:bg-gray-100'}
+            `}
+          >
+            <div className="flex items-center space-x-3">
+              {category.icon?.url && (
                 <Image
-                  src={category.icon?.url}
+                  src={category.icon.url}
                   alt={category.name}
-                  width={500}
-                  height={130}
-                  className='h-[160px] object-cover rounded-xl hover:border-primary cursor-pointer'
+                  width={40}
+                  height={40}
+                  className="object-cover rounded-md"
                 />
-                <h2 className='font-bold text-l group-hover:text-primary '>
-                  {category.name}
-                </h2>
-              </Link>
+              )}
+              <span className="text-sm font-medium">{category.name}</span>
             </div>
-          ))}
-      </div>
-      <ArrowLeftCircle
-        className='absolute w-10 h-10 mr-4 text-white bg-gray-500 rounded-full cursor-pointer xl:hidden -left-12 top-20'
-        onClick={ScrollLeftHandler}
-      />
-      <ArrowRightCircle
-        className='absolute w-10 h-10 ml-4 text-white bg-gray-500 rounded-full cursor-pointer xl:hidden -right-12 top-20'
-        onClick={ScrollRightHandler}
-      />
+            <ChevronRight 
+              className={`
+                w-5 h-5 transition-transform 
+                ${selectedCategory === category.slug 
+                  ? 'text-primary' 
+                  : 'text-gray-400 group-hover:text-gray-600'}
+              `} 
+            />
+          </Link>
+        ))}
     </div>
   );
 }
 
-// Loading component
 function CategoryListLoading() {
   return (
-    <div className="relative mt-10">
-      <div className="flex gap-12 overflow-x-auto">
-        {[1, 2, 3].map((index) => (
-          <div key={index} className="animate-pulse">
-            <div className="flex flex-col items-center gap-2 min-w-[200px]">
-              <div className="w-[500px] h-[160px] bg-gray-200 rounded-xl" />
-              <div className="w-24 h-6 bg-gray-200 rounded" />
-            </div>
-          </div>
-        ))}
-      </div>
+    <div className="space-y-2">
+      {[1, 2, 3, 4].map((index) => (
+        <div key={index} className="flex items-center space-x-3 animate-pulse">
+          <div className="w-10 h-10 bg-gray-200 rounded-md" />
+          <div className="w-2/3 h-4 bg-gray-200 rounded" />
+        </div>
+      ))}
     </div>
   );
 }
 
-// Main component with Suspense boundary
 function CategoryList() {
   return (
     <Suspense fallback={<CategoryListLoading />}>
